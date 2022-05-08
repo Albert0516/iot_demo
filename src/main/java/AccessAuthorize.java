@@ -33,7 +33,7 @@ public class AccessAuthorize {
 
     private String getRequestStr(String validTime)
     {
-        if (validTime.isBlank()) return "";
+        if (validTime.isEmpty()) return "";
 
         JSONObject data = new JSONObject();
         data.put("account",Login.aqaraID);

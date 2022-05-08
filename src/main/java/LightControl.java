@@ -10,7 +10,7 @@ public class LightControl {
     public static String OperateLight()
     {
         String result = HttpConnect.sendRequest(url,"POST", getRequestStr(), true);
-        return result.isBlank()? "fail" : result;
+        return result.isEmpty()? "fail" : result;
     }
 
     private static String getRequestStr()

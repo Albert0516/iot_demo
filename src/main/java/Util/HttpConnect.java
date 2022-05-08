@@ -39,7 +39,7 @@ public class HttpConnect {
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json"); // 设置接收数据的格式
             conn.setRequestProperty("user-agent", "PostmanRuntime/7.29.0");//设置消息头，解决508错误
-            if (needToken && !token.isBlank()) {
+            if (needToken && !token.isEmpty()) {
                 //conn.setRequestProperty("Token", "05babaae0516f042b309fd609658cadebeb3");//令牌
                 conn.setRequestProperty("Token", token);//令牌
             }
