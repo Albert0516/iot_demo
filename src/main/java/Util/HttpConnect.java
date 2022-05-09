@@ -1,5 +1,8 @@
 package Util;
 
+import com.alibaba.fastjson.JSONObject;
+import dto.DeviceCategoryQueryResult;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -91,4 +94,11 @@ public class HttpConnect {
         return "";
     }
 
+
+
+    public static void test(String jsonStr)
+    {
+        DeviceCategoryQueryResult dcqr = JSONObject.parseObject(jsonStr, DeviceCategoryQueryResult.class);
+        System.out.println(dcqr.devCategoryInfos.size());
+    }
 }

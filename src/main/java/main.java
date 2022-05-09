@@ -1,6 +1,4 @@
 import Sensor.Wheather;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 
 import java.util.Scanner;
 
@@ -12,7 +10,6 @@ public class main {
         System.out.println("请输出指令以进行相关操作:");
         System.out.println("0-登录并获取token");
         System.out.println("1-查询设备列表");
-        //System.out.println("2 for query");
         System.out.println("2-LED灯开/关");
         System.out.println("3-查询气温");
         System.out.println("4-查询适度");
@@ -40,12 +37,6 @@ public class main {
 
             }
         }
-//        //1.登录->刷新token
-//        System.out.println(Login.sendLoginRequest());
-//        //2.获取accessToken权限
-//
-//        //3.api
-//        System.out.println(DeviceQuery.QueryDeviceInfo());
     }
 
 
