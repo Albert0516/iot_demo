@@ -1,14 +1,15 @@
+package Service;
+
 import Util.HttpConnect;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 public class DeviceQuery {
-    static final String url = "https://developer.aqara.com/open-server/console/api/debug";
 
     public static String QueryDeviceInfo()
     {
         String jsonStr = getRequestStr();
-        return HttpConnect.sendRequest(url,"POST", jsonStr,true);
+        return HttpConnect.sendRequest(HttpConnect.consoleDebugApi,"POST", jsonStr,true);
     }
 
     private static String getRequestStr()

@@ -1,6 +1,7 @@
 package Util;
 
 import com.alibaba.fastjson.JSONObject;
+import dto.DeviceCategoryInfo;
 import dto.DeviceCategoryQueryResult;
 
 import java.io.BufferedReader;
@@ -13,9 +14,10 @@ import java.net.URL;
 public class HttpConnect {
 
     public static String token = "";
-    //public static String token = new String("ecd4efb602f040472e0b02505e535cfebcc7");
     public static String appId = new String("9660557114988584965dfd41");
     public static String openId = new String("203405981035967938286530695169");
+    public static String urlApi = new String("https://aiot-test.aqara.com/v3.0/open/api");
+    public static String consoleDebugApi = new String("https://developer.aqara.com/open-server/console/api/debug");
     public static String accessToken = new String("ef1f3bdd3b3160494a60861723961159");
 
     public static String sendRequest(String urlParam, String requestType, String requestJsonStr, boolean needToken) {
@@ -95,10 +97,4 @@ public class HttpConnect {
     }
 
 
-
-    public static void test(String jsonStr)
-    {
-        DeviceCategoryQueryResult dcqr = JSONObject.parseObject(jsonStr, DeviceCategoryQueryResult.class);
-        System.out.println(dcqr.devCategoryInfos.size());
-    }
 }

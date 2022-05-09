@@ -1,29 +1,30 @@
+package Service;
+
+import Service.DeviceQuery;
 import Util.HttpConnect;
 import com.alibaba.fastjson.JSONObject;
 
 public class AccessAuthorize {
-    static final String url = DeviceQuery.url;
-    static final String apiUrl = "https://aiot-test.aqara.com/v3.0/open/api";
 
-    public String getAccessToken(){
+    public static String getAccessToken(){
 
         getAccessCode();
         //TODO-获取键盘输入的手机验证码
         String code = "";
         String jsonStr = getCodePlayLoad(code);
-        return HttpConnect.sendRequest(url,"POST", jsonStr,true);
+        return HttpConnect.sendRequest(HttpConnect.consoleDebugApi,"POST", jsonStr,true);
     }
 
-    private String getAccessCode(){
+    private static String getAccessCode(){
         String jsonStr = getRequestStr("7d");
-        return HttpConnect.sendRequest(url,"POST", jsonStr,true);
+        return HttpConnect.sendRequest(HttpConnect.consoleDebugApi,"POST", jsonStr,true);
     }
 
-    private String getCodePlayLoad(String code){
+    private static String getCodePlayLoad(String code){
 
         JSONObject data = new JSONObject();
         data.put("authCode",code);
-        data.put("account",Login.aqaraID);
+        data.put("account", Login.aqaraID);
         data.put("accountType",0);
 
         JSONObject reqParam = new JSONObject();
@@ -31,12 +32,12 @@ public class AccessAuthorize {
         return getString(data, reqParam);
     }
 
-    private String getRequestStr(String validTime)
+    private static String getRequestStr(String validTime)
     {
         if (validTime.isEmpty()) return "";
 
         JSONObject data = new JSONObject();
-        data.put("account",Login.aqaraID);
+        data.put("account", Login.aqaraID);
         data.put("accountType",0);
         data.put("accessTokenValidity",validTime);
 
@@ -45,12 +46,12 @@ public class AccessAuthorize {
         return getString(data, reqParam);
     }
 
-    private String getString(JSONObject data, JSONObject reqParam) {
+    private static String getString(JSONObject data, JSONObject reqParam) {
         reqParam.put("data",data);
 
         JSONObject result = new JSONObject();
         result.put("appId", HttpConnect.appId);
-        result.put("url",apiUrl);
+        result.put("url", HttpConnect.urlApi);
         result.put("requestParams",reqParam);
         result.put("useServer", 1);
         return result.toString();

@@ -4,17 +4,17 @@ import com.alibaba.fastjson.annotation.JSONField;
 
 public class DeviceCategoryInfo {
     @JSONField(name = "iconId")
-    String iconId;
+    public String iconId;
 
     @JSONField(name = "enName")
-    String enName;
+    public String enName;
 
     @JSONField(name = "name")
-    String name;
+    public String name;
 
     @JSONField(name = "model")
-    String model;
+    public String model;
 
     @JSONField(name = "categoryId")
-    int categoryId;
+    public int categoryId;
 }
