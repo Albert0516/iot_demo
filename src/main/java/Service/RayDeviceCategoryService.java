@@ -18,19 +18,7 @@ public class RayDeviceCategoryService {
 
     private static String getRequestStr()
     {
-        JSONObject data = new JSONObject();
-        JSONObject requestParams = new JSONObject();
-        requestParams.put("intent",intent);
-        requestParams.put("data",data);
-
-        JSONObject jsonParam = new JSONObject();
-        jsonParam.put("appId",HttpConnect.appId);
-        jsonParam.put("url",HttpConnect.urlApi);
-        jsonParam.put("requestParams",requestParams);
-        jsonParam.put("useServer",1);
-        jsonParam.put("accessToken",HttpConnect.accessToken);
-
-        return jsonParam.toString();
+        return HttpConnect.packageRequestData(new JSONObject(),intent,true);
     }
 
     public static void readFromJsonStr(String jsonStr) {

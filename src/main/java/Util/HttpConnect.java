@@ -1,8 +1,6 @@
 package Util;
 
 import com.alibaba.fastjson.JSONObject;
-import dto.DeviceCategoryInfo;
-import dto.DeviceCategoryQueryResult;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -97,4 +95,19 @@ public class HttpConnect {
     }
 
 
+    public static String packageRequestData(JSONObject data, String intent, boolean needAccessToken){
+
+        JSONObject params = new JSONObject();
+        params.put("intent",intent);
+        params.put("data",data);
+
+        JSONObject reqParam = new JSONObject();
+        reqParam.put("appId", HttpConnect.appId);
+        reqParam.put("url",HttpConnect.urlApi);
+        reqParam.put("requestParams",params);
+        reqParam.put("useServer",1);
+        if(needAccessToken)
+            reqParam.put("accessToken",HttpConnect.accessToken);
+        return reqParam.toString();
+    }
 }

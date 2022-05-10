@@ -1,6 +1,5 @@
 package Service;
 
-import Service.DeviceQuery;
 import Util.HttpConnect;
 import com.alibaba.fastjson.JSONObject;
 

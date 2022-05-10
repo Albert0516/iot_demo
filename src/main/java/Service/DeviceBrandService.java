@@ -18,17 +18,6 @@ public class DeviceBrandService {
         JSONObject data = new JSONObject();
         data.put("categoryId",categoryId);
 
-        JSONObject requestParams = new JSONObject();
-        requestParams.put("intent",intent);
-        requestParams.put("data",data);
-
-        JSONObject jsonParam = new JSONObject();
-        jsonParam.put("appId",HttpConnect.appId);
-        jsonParam.put("url",HttpConnect.urlApi);
-        jsonParam.put("requestParams",requestParams);
-        jsonParam.put("useServer",1);
-        jsonParam.put("accessToken",HttpConnect.accessToken);
-
-        return jsonParam.toString();
+        return HttpConnect.packageRequestData(data,intent,true);
     }
 }
