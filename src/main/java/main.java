@@ -2,6 +2,7 @@ import AirConditioner.ACControllerService;
 import Sensor.Wheather;
 import Service.*;
 import dtoRequest.ACIconAddDto;
+import dtoRequest.IrControllerClickButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,9 @@ public class main {
         ScheduleService scheduler = new ScheduleService();
         scheduler.checkTemperature();
 
+        System.out.println(Login.sendLoginRequest());
+
         System.out.println("请输出指令以进行相关操作:");
-        System.out.println("0-登录并获取token");
         System.out.println("1-查询设备列表");
         System.out.println("2-LED灯开/关");
         System.out.println("3-查询气温");
@@ -34,8 +36,6 @@ public class main {
             try{
                 ParamInput dataInput = handleInput(input);
                 switch (dataInput.code){
-                    case 0:
-                        System.out.println(Login.sendLoginRequest());break;
                     case 1:
                         System.out.println(Service.DeviceQuery.QueryDeviceInfo());break;
                     case 2:
@@ -52,7 +52,8 @@ public class main {
                         if (dataInput.params==null||dataInput.params.size()==0) throw new RuntimeException();
                         System.out.println(ACControllerService.createIrController(new ACIconAddDto(dataInput.params.get(0))));break;
                     case 8:
-                        System.out.println();
+                        if (dataInput.params==null||dataInput.params.size()==0) throw new RuntimeException();
+                        System.out.println(ACControllerService.clickButton(new IrControllerClickButton(dataInput.params.get(0))));
                         break;
                     case 10:
                         if (dataInput.params==null||dataInput.params.size()==0) throw new RuntimeException();

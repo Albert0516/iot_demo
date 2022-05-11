@@ -41,7 +41,7 @@ public class ACControllerService {
         //解析数返回结果-获取did
         IconAddResultDto resultDto = JSONObject.parseObject(result, IconAddResultDto.class);
         Global.ir_iconMap.put(dto.name, resultDto.device.id);
-        return "success";
+        return "success.devId is:"+resultDto.device.id;
     }
 
     //删除遥控器
