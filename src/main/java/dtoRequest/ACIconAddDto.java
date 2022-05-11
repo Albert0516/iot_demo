@@ -12,6 +12,7 @@ public class ACIconAddDto {
     public ACIconAddDto(){
         brandId = 182;
         categoryId = 5;
+        controllerId = Global.brandId_Medea;
     }
 
     public ACIconAddDto(String devId, String name){

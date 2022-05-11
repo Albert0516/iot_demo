@@ -26,9 +26,9 @@ public class ACControllerService {
     }
 
     //触发按钮
-    public static String clickButton(IrControllerClickButton requestDto){
+    public static String clickButton(IrControllerClickButton requestDto, boolean hasState){
 
-        String jsonStr = getRequestStrClickButton(requestDto);
+        String jsonStr = getRequestStrClickButton(requestDto, hasState);
         String result = HttpConnect.sendRequest(HttpConnect.consoleDebugApi,"POST",jsonStr,true);
         return result;
     }
@@ -52,12 +52,13 @@ public class ACControllerService {
     }
 
 
-    private static String getRequestStrClickButton(IrControllerClickButton requestDto){
+    private static String getRequestStrClickButton(IrControllerClickButton requestDto, boolean hasState){
         JSONObject data = new JSONObject();
         data.put("did",requestDto.devId);
         data.put("brandId",requestDto.brandId);
         data.put("controllerId",requestDto.controllerId);
-        data.put("keyId",requestDto.keyId);
+        String keyId = hasState?"acKey":"keyId";
+        data.put(keyId,requestDto.keyId);
         return HttpConnect.packageRequestData(data, intentClickButton,true);
     }
 

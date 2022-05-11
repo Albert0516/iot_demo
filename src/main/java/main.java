@@ -26,7 +26,7 @@ public class main {
         System.out.println("5-查询紅外设备类型（列表）");
         System.out.println("6-查询支持的空调品牌");
         System.out.println("7-新增遥控器-[name]");
-        System.out.println("8-按键-开空调");
+        System.out.println("8-按键-空调操作+[1-开空调;2-关空调;3-加一度;4-减一度]");
         System.out.println("10-查询遥控器按键信息-[devId]");
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNextLine())
@@ -52,8 +52,10 @@ public class main {
                         if (dataInput.params==null||dataInput.params.size()==0) throw new RuntimeException();
                         System.out.println(ACControllerService.createIrController(new ACIconAddDto(dataInput.params.get(0))));break;
                     case 8:
-                        if (dataInput.params==null||dataInput.params.size()==0) throw new RuntimeException();
-                        System.out.println(ACControllerService.clickButton(new IrControllerClickButton(dataInput.params.get(0))));
+                        if (dataInput.params==null||dataInput.params.size()<2) throw new RuntimeException();
+                        String did = dataInput.params.get(0);
+                        String code = dataInput.params.get(1);
+                        System.out.println(ACControllerService.clickButton(new IrControllerClickButton(did,code),true));
                         break;
                     case 10:
                         if (dataInput.params==null||dataInput.params.size()==0) throw new RuntimeException();
@@ -61,7 +63,7 @@ public class main {
                     default:break;
                 }
             }catch (Exception e){
-
+                System.out.println(e.getMessage());
             }
        }
     }
@@ -76,6 +78,7 @@ public class main {
             for (int i=1;i<params.length;i++)
                 paramList.add(params[i]);
             result.code = code;
+            result.params = paramList;
         }catch (Exception e){
             System.out.println(e.getMessage());
         }

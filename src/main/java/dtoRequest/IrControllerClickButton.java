@@ -9,17 +9,18 @@ public class IrControllerClickButton {
     public String keyId;
 
     public IrControllerClickButton(){
-        this("1");
+        this("P0_M0_T26_S0");
     }
 
     public IrControllerClickButton(String did){
-        this(did,"1");
+        this(did,"P0_M0_T26_S0");
     }
 
-    public IrControllerClickButton(String did,String keyId){
-        this.keyId = keyId;
+    public IrControllerClickButton(String did,String optId){
+        int code = Integer.parseInt(optId);
+        this.keyId = Global.acState.getOpenKey(code);
         devId = did;
         brandId = 182;
-        controllerId = 11732;
+        controllerId = Global.brandId_Medea;
     }
 }
