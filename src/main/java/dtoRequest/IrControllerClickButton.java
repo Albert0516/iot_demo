@@ -5,4 +5,6 @@ public class IrControllerClickButton {
     public int brandId;
     public int controllerId;
     public String keyId;
+
+    public IrControllerClickButton(){}
 }

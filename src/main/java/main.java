@@ -1,7 +1,9 @@
 import AirConditioner.ACControllerService;
 import Sensor.Wheather;
 import Service.*;
+import dtoRequest.ACIconAddDto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,7 +23,9 @@ public class main {
         System.out.println("4-查询适度");
         System.out.println("5-查询紅外设备类型（列表）");
         System.out.println("6-查询支持的空调品牌");
-        System.out.println("7-查询遥控器按键信息");
+        System.out.println("7-新增遥控器-[name]");
+        System.out.println("8-按键-开空调");
+        System.out.println("10-查询遥控器按键信息-[devId]");
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNextLine())
         {
@@ -45,8 +49,14 @@ public class main {
                     case 6:
                         System.out.println(DeviceBrandService.queryForDevCategories());break;
                     case 7:
-                        String did_test = "ir.973750669297958912";
-                        System.out.println(ACControllerService.ButtonInfoQuery_IrController(did_test));break;
+                        if (dataInput.params==null||dataInput.params.size()==0) throw new RuntimeException();
+                        System.out.println(ACControllerService.createIrController(new ACIconAddDto(dataInput.params.get(0))));break;
+                    case 8:
+                        System.out.println();
+                        break;
+                    case 10:
+                        if (dataInput.params==null||dataInput.params.size()==0) throw new RuntimeException();
+                        System.out.println(ACControllerService.ButtonInfoQuery_IrController(dataInput.params.get(0)));break;
                     default:break;
                 }
             }catch (Exception e){
@@ -61,6 +71,9 @@ public class main {
         ParamInput result = new ParamInput();
         try{
             int code = Integer.parseInt(params[0]);
+            List<String> paramList = new ArrayList<>(params.length-1);
+            for (int i=1;i<params.length;i++)
+                paramList.add(params[i]);
             result.code = code;
         }catch (Exception e){
             System.out.println(e.getMessage());
