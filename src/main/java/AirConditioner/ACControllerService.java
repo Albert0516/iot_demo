@@ -15,6 +15,7 @@ public class ACControllerService {
     static final String intentAdd = "config.ir.create";
     static final String intentDelete = "config.ir.delete";
 
+    //查询遥控器的按钮列表信息
     public static String ButtonInfoQuery_IrController(String iconName){
 
         //String did = Global.ir_iconMap.get(iconName);
@@ -24,6 +25,7 @@ public class ACControllerService {
         return result;
     }
 
+    //触发按钮
     public static String clickButton(IrControllerClickButton requestDto){
 
         String jsonStr = getRequestStrClickButton(requestDto);
@@ -31,7 +33,8 @@ public class ACControllerService {
         return result;
     }
 
-    public static String addIrController(ACIconAddDto dto){
+    //新建遥控器
+    public static String createIrController(ACIconAddDto dto){
 
         String jsonStr = getRequestStrAdd(dto);
         String result = HttpConnect.sendRequest(HttpConnect.consoleDebugApi,"POST",jsonStr,true);
@@ -41,6 +44,7 @@ public class ACControllerService {
         return "success";
     }
 
+    //删除遥控器
     public static String deleteIrController(String iconName){
         String did = Global.ir_iconMap.get(iconName);
         String jsonStr = getRequestStrDelete(did);

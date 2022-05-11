@@ -2,6 +2,7 @@ import AirConditioner.ACControllerService;
 import Sensor.Wheather;
 import Service.*;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class main {
@@ -27,8 +28,8 @@ public class main {
             String input = scanner.nextLine();
             System.out.println("received input:"+input);
             try{
-                int code = Integer.parseInt(input);
-                switch (code){
+                ParamInput dataInput = handleInput(input);
+                switch (dataInput.code){
                     case 0:
                         System.out.println(Login.sendLoginRequest());break;
                     case 1:
@@ -54,5 +55,25 @@ public class main {
        }
     }
 
+    public static ParamInput handleInput(String lineParams){
+        String[] params = lineParams.split(" ");
+        if(params.length==0) throw new RuntimeException();
+        ParamInput result = new ParamInput();
+        try{
+            int code = Integer.parseInt(params[0]);
+            result.code = code;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 
+        return result;
+    }
+
+
+}
+
+class ParamInput{
+    int code;
+
+    List<String> params;
 }
