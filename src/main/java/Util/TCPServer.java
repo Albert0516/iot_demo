@@ -23,6 +23,7 @@ public class TCPServer {
             System.out.println("TCP server starting...");
             // 建立服务器连接
             ServerSocket server = new ServerSocket(port);//创建  ServerSocket类
+            System.out.println("TCP server create finish.Now waiting for client connection...");
             Socket socket = server.accept();// 等待客户连接
             try {
                 DataInputStream in = new DataInputStream(socket.getInputStream());      // 读取客户端传过来信息的DataInputStream
