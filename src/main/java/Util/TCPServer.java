@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class TCPServer {
-    private int port = 5566;
+    private int port = 8189;
     private String sendData = "64 03 00 00 00 0A C5 CD";
 
     public TCPServer(){}
@@ -28,21 +28,16 @@ public class TCPServer {
                 DataInputStream in = new DataInputStream(socket.getInputStream());      // 读取客户端传过来信息的DataInputStream
                 DataOutputStream out = new DataOutputStream(socket.getOutputStream());  // 向客户端发送信息的DataOutputStream
 
-                System.out.println("TCP server start success!");
-                System.out.println("服务器：" + sendData);//输出提示信息
-                out.writeUTF("服务器：" + sendData);//把服务器端的输入发给客户端
-                Thread.sleep(1000);
                 while (true) {
                     String accpet = in.readUTF();// 读取来自客户端的信息
                     System.out.println(accpet);//输出来自客户端的信息
 
                     System.out.println("服务器：" + sendData);//输出提示信息
                     out.writeUTF("服务器：" + sendData);//把服务器端的输入发给客户端
-                    Thread.sleep(3000);
                 }
-            } catch (InterruptedException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
-            } finally {// 建立连接失败的话不会执行socket.close();
+            } finally {
                 socket.close();//关闭连接
                 server.close();//关闭
             }
