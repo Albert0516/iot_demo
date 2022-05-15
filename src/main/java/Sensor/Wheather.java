@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONObject;
 public class Wheather {
     public static final int TEMPERATURE = 1;
     public static final int HUMIDITY = 2;
-    private static String deviceId = "lumi.158d00066b1d56";
+    private static String deviceId = "lumi.158d0007f2b6c5";
     private static String opt_temperature = "0.1.85";
     private static String opt_humidity = "0.2.85";
 

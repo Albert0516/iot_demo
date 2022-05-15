@@ -19,7 +19,8 @@ public class IrControllerClickButton {
     public IrControllerClickButton(String did,String optId){
         int code = Integer.parseInt(optId);
         this.keyId = Global.acState.getOpenKey(code);
-        devId = did;
+        if(did !=null) Global.acState.SetAcId(did);
+        devId = Global.acState.getAcId();
         brandId = 182;
         controllerId = Global.brandId_Medea;
     }

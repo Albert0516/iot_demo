@@ -1,7 +1,17 @@
 package pojo;
 
 public class ACState {
-    int isOn;
+    public int isOn;
+
+    String acID = "ir.974072506284359680";
+
+    public String getAcId(){
+        return acID;
+    }
+
+    public void SetAcId(String did){
+        acID = did;
+    }
 
     int temperature;
 

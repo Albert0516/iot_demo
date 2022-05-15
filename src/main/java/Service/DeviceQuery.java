@@ -1,5 +1,6 @@
 package Service;
 
+import Util.Global;
 import Util.HttpConnect;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -15,7 +16,7 @@ public class DeviceQuery {
     private static String getRequestStr()
     {
         JSONArray deviceIds = new JSONArray();
-        deviceIds.add("lumi1.54ef443915a0");
+        deviceIds.add(Global.M2_devId);
         JSONObject data = new JSONObject();
         data.put("dids",deviceIds);
         data.put("positionId","");

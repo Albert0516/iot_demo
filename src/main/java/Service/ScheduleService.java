@@ -14,8 +14,8 @@ public class ScheduleService {
     public void checkTemperature(){
 
         init();
-        long initialDelay = 10*60;
-        long period = 5*60;
+        long initialDelay = 5;
+        long period = 5;
 
         DataMonitorService dm_service = new DataMonitorService();
         scheduler.scheduleWithFixedDelay(dm_service,initialDelay,period, TimeUnit.SECONDS);

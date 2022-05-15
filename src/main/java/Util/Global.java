@@ -9,4 +9,5 @@ public class Global {
     public static int brandId_Medea = 11272;
     public static ACState acState= new ACState();
     public static HashMap<String, String> ir_iconMap = new HashMap<String, String>(){};
+    public static HashMap<String, String> deviceMap = new HashMap<String, String>(){};
 }
