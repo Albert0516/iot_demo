@@ -4,6 +4,9 @@ import pojo.ACState;
 
 import java.util.HashMap;
 
+/**
+ * 全局变量（暂存）
+ */
 public class Global {
     public static String M2_devId = "lumi1.54ef442b11e7";
     public static int brandId_Medea = 11272;

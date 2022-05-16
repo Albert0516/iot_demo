@@ -4,20 +4,32 @@ import Util.HttpConnect;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-public class Wheather {
+/**
+ * 温湿度传感器
+ */
+public class Weather {
     public static final int TEMPERATURE = 1;
     public static final int HUMIDITY = 2;
-    private static String deviceId = "lumi.158d0007f2b6c5";
+    //private static String deviceId = "lumi.158d0007f2b6c5";
+    private static String deviceId = "lumi.158d0007f2b715";
     private static String opt_temperature = "0.1.85";
     private static String opt_humidity = "0.2.85";
 
-    private static String url = "https://developer.aqara.com/open-server/console/debug/query/resource";
-
+    /**
+     * 请求传感器数据（温度 or 湿度）
+     * @param requestType
+     * @return
+     */
     public static String requestData(int requestType)
     {
-        return HttpConnect.sendRequest(url,"POST",getRequestStr(requestType),true);
+        return HttpConnect.sendPostRequest(HttpConnect.resourceQueryApi, getRequestStr(requestType));
     }
 
+    /**
+     * 根据传入的请求对象，封装aqaraApi请求数据 - 请求传感器数据（温度 or 湿度）
+     * @param requestType
+     * @return
+     */
     private static String getRequestStr(int requestType)
     {
         JSONArray options = new JSONArray();

@@ -9,16 +9,20 @@ public class RayDeviceCategoryService {
 
     static final String intent = "query.ir.categories";
 
+    /**
+     * 查询空外设备类型（列表）
+     * @return
+     */
     public static String queryForDevCategories(){
         String jsonStr = getRequestStr();
-        String responseStr = HttpConnect.sendRequest(HttpConnect.consoleDebugApi,"POST",jsonStr,true);
+        String responseStr = HttpConnect.sendPostRequest(HttpConnect.consoleDebugApi,jsonStr);
         readFromJsonStr(responseStr);
         return "success";
     }
 
     private static String getRequestStr()
     {
-        return HttpConnect.packageRequestData(new JSONObject(),intent,true);
+        return HttpConnect.packageRequestData(new JSONObject(), intent,true);
     }
 
     public static void readFromJsonStr(String jsonStr) {

@@ -5,35 +5,34 @@ import Util.HttpConnect;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 查询设备信息
+ */
 public class DeviceQuery {
 
-    public static String QueryDeviceInfo()
+    static final String intentQueryDevInfo = "query.device.info";
+    public static String QueryDeviceInfo(List<String> devIds)
     {
-        String jsonStr = getRequestStr();
-        return HttpConnect.sendRequest(HttpConnect.consoleDebugApi,"POST", jsonStr,true);
+        if(devIds.size()==0) throw new RuntimeException("请求的设备列表为空！");
+        String jsonStr = getRequestStr(devIds);
+        return HttpConnect.sendPostRequest(HttpConnect.consoleDebugApi, jsonStr);
     }
 
-    private static String getRequestStr()
+    private static String getRequestStr(List<String> devIds)
     {
         JSONArray deviceIds = new JSONArray();
-        deviceIds.add(Global.M2_devId);
+        for(String devId:devIds)
+            deviceIds.add(devId);
+
         JSONObject data = new JSONObject();
         data.put("dids",deviceIds);
         data.put("positionId","");
         data.put("pageNum", 1);
         data.put("pageSize", 10);
 
-        JSONObject requestParams = new JSONObject();
-        requestParams.put("intent","query.device.info");
-        requestParams.put("data",data);
-
-        JSONObject param = new JSONObject();
-        param.put("appId", "9660557114988584965dfd41");
-        param.put("url", "https://aiot-test.aqara.com/v3.0/open/api");
-        param.put("requestParams", requestParams);
-
-        param.put("useServer", 1);
-        param.put("accessToken", HttpConnect.accessToken);
-        return param.toString();
+        return HttpConnect.packageRequestData(data,intentQueryDevInfo,true);
     }
 }

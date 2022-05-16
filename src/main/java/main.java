@@ -1,9 +1,7 @@
 import AirConditioner.ACControllerService;
-import Sensor.Wheather;
+import Sensor.Weather;
 import Service.*;
 import Util.HttpConnect;
-import Util.TCPClient;
-import Util.TCPServer;
 import dtoRequest.ACIconAddDto;
 import dtoRequest.IrControllerClickButton;
 
@@ -40,17 +38,19 @@ public class main {
                 ParamInput dataInput = handleInput(input);
                 switch (dataInput.code){
                     case 1:
-                        System.out.println(Service.DeviceQuery.QueryDeviceInfo());break;
+                        if (dataInput.params==null||dataInput.params.size()==0) throw new RuntimeException();
+                        System.out.println(Service.DeviceQuery.QueryDeviceInfo(dataInput.params));break;
                     case 2:
                         System.out.println(LightControl.OperateLight());break;
                     case 3:
-                        System.out.println(Wheather.requestData(Wheather.TEMPERATURE));break;
+                        System.out.println(Weather.requestData(Weather.TEMPERATURE));break;
                     case 4:
-                        System.out.println(Wheather.requestData(Wheather.HUMIDITY));break;
+                        System.out.println(Weather.requestData(Weather.HUMIDITY));break;
                     case 5:
                         RayDeviceCategoryService.queryForDevCategories();break;
                     case 6:
-                        System.out.println(DeviceBrandService.queryForDevCategories());break;
+                        if (dataInput.params==null||dataInput.params.size()==0) throw new RuntimeException();
+                        System.out.println(DeviceBrandService.queryForDevCategories(dataInput.params.get(0)));break;
                     case 7:
                         if (dataInput.params==null||dataInput.params.size()==0) throw new RuntimeException();
                         System.out.println(ACControllerService.createIrController(new ACIconAddDto(dataInput.params.get(0))));break;

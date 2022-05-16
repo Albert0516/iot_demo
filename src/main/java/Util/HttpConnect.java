@@ -9,14 +9,30 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Aqara开发者平台连接逻辑-工具类
+ */
 public class HttpConnect {
 
     public static String token = "";
+    /**
+     * 应用id-与账号绑定
+     */
     public static String appId = new String("9660557114988584965dfd41");
+
     public static String openId = new String("203405981035967938286530695169");
     public static String urlApi = new String("https://aiot-test.aqara.com/v3.0/open/api");
     public static String consoleDebugApi = new String("https://developer.aqara.com/open-server/console/api/debug");
+    public static String resourceQueryApi = new String("https://developer.aqara.com/open-server/console/debug/query/resource");
+    public static String resourceWriteApi = new String("https://developer.aqara.com/open-server/console/debug/write/resource");
     public static String accessToken = new String("612b6095af155b8684c356a978b950d4");
+
+    public static final String POST_TYPE = "POST";
+
+
+    public static String sendPostRequest(String urlParam, String requestJsonStr){
+      return sendRequest(urlParam, POST_TYPE, requestJsonStr,true);
+    }
 
     public static String sendRequest(String urlParam, String requestType, String requestJsonStr, boolean needToken) {
 
@@ -55,9 +71,8 @@ public class HttpConnect {
             bufferOut.append(requestJsonStr);
             bufferOut.flush();
             bufferOut.close();
-            //得到响应码
-            //int responseCode = conn.getResponseCode();
 
+            //得到响应码
             if (conn.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 if(!needToken)
                 {
@@ -95,6 +110,13 @@ public class HttpConnect {
     }
 
 
+    /**
+     * 数据封装-AqaraApi
+     * @param data
+     * @param intent
+     * @param needAccessToken
+     * @return
+     */
     public static String packageRequestData(JSONObject data, String intent, boolean needAccessToken){
 
         JSONObject params = new JSONObject();

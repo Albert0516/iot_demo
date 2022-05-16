@@ -1,7 +1,7 @@
 package Service;
 
 import AirConditioner.ACControllerService;
-import Sensor.Wheather;
+import Sensor.Weather;
 import Util.Global;
 import com.alibaba.fastjson.JSONObject;
 import dto.Temperature;
@@ -11,11 +11,14 @@ import dtoRequest.IrControllerClickButton;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * 传感器数据监测逻辑 - 温度
+ */
 public class DataMonitorService implements Runnable{
     @Override
     public void run() {
         //System.out.println("test for schedule service-current time:"+System.currentTimeMillis());
-        String result = Wheather.requestData(Wheather.TEMPERATURE);
+        String result = Weather.requestData(Weather.TEMPERATURE);
         //System.out.println(result);
         TemperatureResult tempResult = JSONObject.parseObject(result, TemperatureResult.class);
         if(tempResult.tempObj==null||tempResult.tempObj.size() ==0) return;
@@ -26,7 +29,6 @@ public class DataMonitorService implements Runnable{
             if(Global.acState.isOn==1){
                 ACControllerService.clickButton(new IrControllerClickButton(null,"1"),true);
             }
-
         }
         if(tempVal<25){
             if(Global.acState.isOn==0){
@@ -35,9 +37,6 @@ public class DataMonitorService implements Runnable{
         }
     }
 
-//    public boolean isWorkTime(){
-//        Date date = new Date();
-//    }
 
     public static String Date2String(String timestamp) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
