@@ -3,6 +3,8 @@ package Service;
 import Util.HttpConnect;
 import com.alibaba.fastjson.JSONObject;
 
+import java.util.Scanner;
+
 /**
  * 获取授权码及授权验证
  */
@@ -11,10 +13,10 @@ public class AccessAuthorize {
     static final String intentGetToken = "config.auth.getToken";
     static final String intentGetAuthCode = "config.auth.getAuthCode";
 
-    public static String getAccessToken(String timePeriod){
-        getAccessCode(timePeriod);
-        //TODO-获取键盘输入的手机验证码
-        String code = "";
+    public static String getAccessToken(String timePeriod, Scanner scanner){
+        String responseStr = getAccessCode(timePeriod);
+        System.out.println("请输入手机获取到的验证码：");
+        String code = scanner.nextLine();
         String jsonStr = getCodePlayLoad(code);
         return HttpConnect.sendPostRequest(HttpConnect.consoleDebugApi, jsonStr);
     }

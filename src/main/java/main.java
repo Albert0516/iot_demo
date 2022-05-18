@@ -5,7 +5,9 @@ import Util.HttpConnect;
 import dtoRequest.ACIconAddDto;
 import dtoRequest.IrControllerClickButton;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Scanner;
 
@@ -19,11 +21,14 @@ public class main {
         ScheduleService scheduler = new ScheduleService();
         scheduler.checkTemperature();
 
+        String temp = Base64.getEncoder().encodeToString("852456ygy".getBytes(StandardCharsets.UTF_8));
+        System.out.println(temp);
+
         System.out.println("请输出指令以进行相关操作:");
         System.out.println("1-查询设备列表");
         System.out.println("2-LED灯开/关");
         System.out.println("3-查询气温");
-        System.out.println("4-查询适度");
+        System.out.println("4-查询湿度");
         System.out.println("5-查询紅外设备类型（列表）");
         System.out.println("6-查询支持的空调品牌");
         System.out.println("7-新增遥控器-[name]");
@@ -32,7 +37,7 @@ public class main {
         Scanner scanner = new Scanner(System.in);
         while(scanner.hasNextLine())
         {
-            String input = scanner.nextLine();
+                String input = scanner.nextLine();
             System.out.println("received input:"+input);
             try{
                 ParamInput dataInput = handleInput(input);
@@ -71,11 +76,6 @@ public class main {
        }
     }
 
-    public static void testConnect(){
-        String url = "http://192.168.1.101:9527/test";
-        String result = HttpConnect.sendRequest(url,"GET","",false);
-        System.out.println(result);
-    }
 
     public static ParamInput handleInput(String lineParams){
         String[] params = lineParams.split(" ");

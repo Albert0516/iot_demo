@@ -8,7 +8,16 @@ import com.alibaba.fastjson.JSONObject;
  */
 public class LightControl {
     //private static String deviceId = "lumi.54ef44100035ddd9";
+
+    /**
+     * 灯泡的id(需提前连接到网关并设置id)
+     */
     private static String deviceId = "lumi.54ef44100035c7d1";
+
+    /**
+     * 灯的开启状态
+     * false-关闭状态；true-开启状态
+     */
     private static boolean lightState = false;
 
 
