@@ -12,6 +12,8 @@ public class DeviceBrandService {
 
     /**
      * 查询空调品牌列表
+     * @param categoryId
+     * @return
      */
     public static String queryForDevCategories(String categoryId){
         try{

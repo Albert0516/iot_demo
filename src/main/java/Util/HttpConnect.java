@@ -34,6 +34,14 @@ public class HttpConnect {
       return sendRequest(urlParam, POST_TYPE, requestJsonStr,true);
     }
 
+    /**
+     * 通过HTTP协议调用Aqara API
+     * @param urlParam
+     * @param requestType
+     * @param requestJsonStr
+     * @param needToken
+     * @return
+     */
     public static String sendRequest(String urlParam, String requestType, String requestJsonStr, boolean needToken) {
 
         HttpURLConnection conn = null;
